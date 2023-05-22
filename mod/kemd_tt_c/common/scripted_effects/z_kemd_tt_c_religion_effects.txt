@@ -1,0 +1,51 @@
+﻿mz_update_dawnbreakers_effect = {
+	save_temporary_scope_as = mz_this_character
+	if = {
+		limit = { 
+			NOT = {
+				faith = { has_doctrine_parameter = mz_dawnbreakers_active }
+			}
+			is_alive = yes
+		}
+		remove_all_character_modifier_instances = mz_dawnbreakers_modifier
+	}
+	else_if = {
+		limit = { 
+			faith = { has_doctrine_parameter = mz_dawnbreakers_active }
+			is_ruler = no
+			is_alive = yes
+		}
+		remove_all_character_modifier_instances = mz_dawnbreakers_modifier
+	}
+	else_if = {
+		limit = { 
+			faith = { has_doctrine_parameter = mz_dawnbreakers_active }
+			is_ruler = yes
+		}
+		if = { 
+			limit = { is_alive = yes }
+			remove_all_character_modifier_instances = mz_dawnbreakers_modifier
+			set_variable = {
+				name = dawnbreakers_modifier_stacks
+				value = 0
+			}
+		}
+		every_spouse = {
+			limit = {
+				is_alive = yes
+				is_close_family_of = scope:mz_this_character
+			}
+			scope:mz_this_character = {
+				if = {
+					limit = { var:dawnbreakers_modifier_stacks < dawnbreakers_modifier_stack_maximum }
+					add_character_modifier = mz_dawnbreakers_modifier
+					change_variable = {
+						name = dawnbreakers_modifier_stacks
+						add = 1
+					}
+				}
+			}
+		}
+	}
+}
+

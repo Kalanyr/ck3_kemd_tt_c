@@ -1,0 +1,2 @@
+﻿## Limit Dawnbreaker stacking due to increased spouses
+dawnbreakers_modifier_stack_maximum = 4 # The maximum amount of Prowess that can be gained from Dark Insights
