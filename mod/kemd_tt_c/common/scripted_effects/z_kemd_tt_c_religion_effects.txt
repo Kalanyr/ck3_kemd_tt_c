@@ -25,24 +25,22 @@
 		if = { 
 			limit = { is_alive = yes }
 			remove_all_character_modifier_instances = mz_dawnbreakers_modifier
-			set_variable = {
-				name = dawnbreakers_modifier_stacks
-				value = 0
-			}
 		}
-		every_spouse = {
+		if = {
 			limit = {
-				is_alive = yes
-				is_close_family_of = scope:mz_this_character
+				any_spouse = {
+					is_alive = yes
+					is_close_family_of = scope:mz_this_character
+				}
 			}
-			scope:mz_this_character = {
-				if = {
-					limit = { var:dawnbreakers_modifier_stacks < dawnbreakers_modifier_stack_maximum }
+			ordered_spouse = {
+				limit = {
+					is_alive = yes
+					is_close_family_of = scope:mz_this_character
+				}
+				max = dawnbreakers_modifier_stack_maximum
+				scope:mz_this_character = {
 					add_character_modifier = mz_dawnbreakers_modifier
-					change_variable = {
-						name = dawnbreakers_modifier_stacks
-						add = 1
-					}
 				}
 			}
 		}
